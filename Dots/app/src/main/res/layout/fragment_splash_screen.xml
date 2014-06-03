@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/img"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/abc_ab_solid_light_holo">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bosware"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
+        android:text="BOS" />
+
+    <!--android:layout_alignParentBottom="true" -->
+
+
+
+    tools:context="com.example.app.SplashScreen$PlaceholderFragment">
+
+
+
+</LinearLayout>
+<!-- From: file:/C:/Users/Brad/AndroidStudioProjects/Dots/app/src/main/res/layout/fragment_splash_screen.xml -->
