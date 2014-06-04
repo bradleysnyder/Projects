@@ -1,7 +1,57 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#AA0000"
-    tools:context="com.example.app.MainActivity" />
+    android:layout_height="wrap_content"
+    android:background="@drawable/dots"
+    tools:context="com.example.app.MainActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <!--testing a draw 9-patch -->
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginBottom="30dp"
+            android:text="Play"
+            android:id="@+id/playButton"
+            android:background="@drawable/greentest"
+            android:textColor="#FFFFFF"
+            android:clickable="true"
+            />
+
+        <!--testing a rounded button -->
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginBottom="30dp"
+            android:padding="15dp"
+            android:text="Settings"
+            android:id="@+id/settingsButton"
+            android:background="@drawable/settings"
+            android:textColor="#FFFFFF"
+            android:clickable="true"
+            />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginBottom="30dp"
+            android:text="Sync"
+            android:id="@+id/syncButton"
+            android:background="#880044"
+            android:textColor="#FFFFFF"
+            android:clickable="true"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
