@@ -37,36 +37,39 @@ public class SplashScreen extends Activity {
         ImageView img = (ImageView) findViewById(R.id.image);
         img.setImageResource(R.drawable.bosware);
 
-        //new Handler().postDelayed(new Runnable(){
-
-          //  @Override
-            //public void run(){
-              //  Intent i = new Intent(SplashScreen.this, MainActivity.class);
-                //startActivity(i);
-
-                //stop activity
-                //finish();
-            //}
-        //},
-        //splash_timer);
-
-
-        Thread timer = new Thread(){
+        new Handler().postDelayed(new Runnable(){
 
             @Override
             public void run(){
-                try{
-                    sleep(3000);
-                } catch (InterruptedException e){
-                    e.printStackTrace();
-                } finally{
-                    Intent i = new Intent (SplashScreen.this, MainActivity.class);
-                    startActivity(i);
-                }
-            }
+                Intent i = new Intent(SplashScreen.this, MainActivity.class);
+                startActivity(i);
 
-        };
-        timer.start();
+                //stop activity
+                finish();
+            }
+        },
+        splash_timer);
+
+
+        //Thread timer = new Thread(){
+
+            //@Override
+            //public void run(){
+                //try{
+                    //sleep(3000);
+                //} catch (InterruptedException e){
+                    //e.printStackTrace();
+                //} finally{
+                    //Intent i = new Intent (SplashScreen.this, MainActivity.class);
+                    //startActivity(i);
+
+                    //close activity
+                    //finish();
+                //}
+            //}
+
+        //};
+        //timer.start();
 
     }
 }

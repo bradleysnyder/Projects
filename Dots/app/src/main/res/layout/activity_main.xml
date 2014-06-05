@@ -25,7 +25,7 @@
             android:clickable="true"
             />
 
-        <!--testing a rounded button -->
+        <!--testing a rounded button that acknowledges when it has been pressed -->
 
         <Button
             android:layout_width="wrap_content"
