@@ -32,9 +32,17 @@ public class MainActivity extends Activity {
 
         play.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){
-                Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
-                MainActivity.this.startActivity(gameIntent);
+            public void onClick(View view){
+                Intent gameIntroIntent = new Intent(MainActivity.this, GameIntroScreen.class);
+                //gameIntroIntent.putExtra("Calling class", "MainActivity");
+                //added to try and switch the content view??
+                //the below line just duplicated the layout
+                //setContentView(R.layout.activity_game_intro_screen);
+                //MainActivity.this.startActivity(gameIntroIntent);
+                //don't want MainActivity to finish since pressing back will result
+                //in thee game completely exiting
+                //finish();
+                startActivity(gameIntroIntent);
             }
         });
 

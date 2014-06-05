@@ -54,4 +54,14 @@
 
     </LinearLayout>
 
+    <!-- I want this view centered better for larger screens -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:text="Dots"
+        android:textSize="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"/>
+
 </RelativeLayout>
