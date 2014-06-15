@@ -15,20 +15,20 @@ public class Circle {
             // This matrix member variable provides a hook to manipulate
             // the coordinates of the objects that use this vertex shader
             "uniform mat4 uMVPMatrix;" +
-                    "attribute vec4 vPosition;" +
-                    "void main() {" +
-                    // the matrix must be included as a modifier of gl_Position
-                    // Note that the uMVPMatrix factor *must be first* in order
-                    // for the matrix multiplication product to be correct.
-                    "  gl_Position = vPosition;" +
-                    "}";
+            "attribute vec4 vPosition;" +
+            "void main() {" +
+            // the matrix must be included as a modifier of gl_Position
+            // Note that the uMVPMatrix factor *must be first* in order
+            // for the matrix multiplication product to be correct.
+            "  gl_Position = uMVPMatrix * vPosition;" + //took out uMVPMatrix part, adding it back in makes the circle unrenderable
+            "}";
 
     private final String fragmentShaderCode =
             "precision mediump float;" +
-                    "uniform vec4 vColor;" +
-                    "void main() {" +
-                    "  gl_FragColor = vColor;" +
-                    "}";
+            "uniform vec4 vColor;" +
+            "void main() {" +
+            "  gl_FragColor = vColor;" +
+            "}";
 
 
     private FloatBuffer vertexBuffer;
@@ -64,6 +64,7 @@ public class Circle {
         }
 
         //allocate number of coords * 4 bytes per coord
+        //changing this from allocate to allocateDirect fixed the rendering issue about using native order buffer
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(circleCoords.length*4);
 
         //use device hardware's native byteorder
@@ -100,12 +101,13 @@ public class Circle {
     public void draw(float[] mvpMatrix){
         //add program to opengles environment
         GLES20.glUseProgram(mProgram);
+        //GLES20.glLinkProgram(mProgram);
 
         //get handle to vertex shader's vPosition member
         mPositionHandle = GLES20.glGetAttribLocation(mProgram, "vPosition");
 
         //enable a handle to the circle vertices
-        //GLES20.glEnableVertexAttribArray(mPositionHandle);
+        GLES20.glEnableVertexAttribArray(mPositionHandle);
 
         //prepare the circle's coordinate data
         GLES20.glVertexAttribPointer(
@@ -115,7 +117,7 @@ public class Circle {
 
         //was recommended to place the enable vertex attrib array after vertex attrib pointer..didn't solve anything though
         //enable a handle to the circle vertices
-        GLES20.glEnableVertexAttribArray(mPositionHandle);
+        //GLES20.glEnableVertexAttribArray(mPositionHandle);
 
         // get handle to fragment shader's vColor member
         mColorHandle = GLES20.glGetUniformLocation(mProgram, "vColor");
@@ -123,13 +125,15 @@ public class Circle {
         // Set color for drawing the triangle
         GLES20.glUniform4fv(mColorHandle, 1, color, 0);
 
+        //the next two calls aren't working
+        //seems like the program isn't properly linked
         // get handle to shape's transformation matrix
-        //mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix");
-        //CircleRenderer.checkGlError("glGetUniformLocation");
+        mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix");
+        CircleRenderer.checkGlError("glGetUniformLocation");
 
         // Apply the projection and view transformation
-        //GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mvpMatrix, 0);
-        //CircleRenderer.checkGlError("glUniformMatrix4fv");
+        GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mvpMatrix, 0);
+        CircleRenderer.checkGlError("glUniformMatrix4fv");
 
         //draw circle contours
         //don't think I need this line

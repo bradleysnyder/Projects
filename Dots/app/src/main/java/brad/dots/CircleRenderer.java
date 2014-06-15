@@ -2,6 +2,7 @@ package brad.dots;
 
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.opengl.GLU;
 import android.opengl.Matrix;
 import android.util.Log;
 
@@ -43,6 +44,10 @@ public class CircleRenderer implements GLSurfaceView.Renderer {
         //draw background frame color
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
+        //unused.glMatrixMode(GL10.GL_PROJECTION);
+        //unused.glLoadIdentity();
+        //GLU.gluLookAt(unused, 0,0,5, 0f,0f,0f,0f,1.0f, 0.0f);
+
         //no idea what this is doing..
         //going to comment out the three matrix lines
         //set camera position (View matrix)
@@ -77,6 +82,12 @@ public class CircleRenderer implements GLSurfaceView.Renderer {
         // in the onDrawFrame() method
         //not sure what this does..
         Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
+
+        //unused.glMatrixMode(GL10.GL_PROJECTION);
+        //unused.glLoadIdentity();
+        //unused.glFrustumf(-ratio, ratio, -1, 1, 3, 7);
+
+
 
     }
 
