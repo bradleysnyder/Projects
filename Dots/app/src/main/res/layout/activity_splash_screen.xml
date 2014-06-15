@@ -22,5 +22,4 @@
         android:layout_alignParentBottom="true"
         android:text="BOS"/>
 
-
 </RelativeLayout>
