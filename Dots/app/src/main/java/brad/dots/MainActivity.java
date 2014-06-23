@@ -17,6 +17,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //changed them to final..think it means they cannot be changed during execution
         Button play, settings, sync;
 
 
@@ -38,6 +39,8 @@ public class MainActivity extends Activity {
                 //in thee game completely exiting
                 //finish();
                 startActivity(gameIntroIntent);
+                //play.playSoundEffect(0);
+
             }
         });
 

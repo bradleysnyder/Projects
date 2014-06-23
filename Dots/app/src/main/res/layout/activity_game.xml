@@ -2,7 +2,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="brad.dots.GameActivity">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: "
+        android:textSize="20dp"
+        android:padding="2dp"
+        android:layout_toLeftOf="@+id/playerScore"
+        android:id="@+id/scoreBox"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="20dp"
+        android:ellipsize="end"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:padding="2dp"
+        android:id="@+id/playerScore"/>
+
+    <!--might be a good idea?
+    <brad.dots.CircleGLSurfaceView
+        android:id="@+id/circleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+        -->
+
+
+
+    <!--might need to make a GLSurfaceView addition to the layout -->
 
 </RelativeLayout>

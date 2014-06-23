@@ -1,6 +1,9 @@
 package brad.dots;
 
 import android.opengl.GLES20;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -33,7 +36,7 @@ public class Circle {
 
     private FloatBuffer vertexBuffer;
     private float[] circleCoords = new float[364*3];
-    private final int mProgram;
+    public final int mProgram;
     private int mPositionHandle;
     private int mColorHandle;
     private int mMVPMatrixHandle;
@@ -43,7 +46,8 @@ public class Circle {
 
 
 
-    float color[] = { 0.63671875f, 0.76953125f, 0.22265625f, 1.0f };
+    //float color[] = { 0.63671875f, 0.76953125f, 0.22265625f, 1.0f };
+    float color[] = {0.0f, 0.0f, 0.0f, 1.0f};
 
     public Circle(){
 
@@ -51,21 +55,30 @@ public class Circle {
         //yep works, just places oval (not yet circle, need projection views I think) in center
         //this is the center that the triangle is fanned around
         //interesting to note that (0,0,0) is the center of the screen
-        circleCoords[0] = 0;
-        circleCoords[1] = 0;
+        //circleCoords[0] = (float)0.1;
+        //circleCoords[1] = (float)0.2;
+        //circleCoords[2] = (float)0;     //changing this doesn't seem to change circle
+
+        //should fetch two numbers in the acceptable range
+        //apparently 0.9 doesn't work..
+        //edit: it does work, I just had to scale the width since my tablet screen isn't a square
+        circleCoords[0] = (float) -0.85*10/16 + (float)(Math.random() * (0.75*10/16 + 0.85*10/16));
+        circleCoords[1] = (float) -0.85 + (float)(Math.random() * (0.75 + 0.85));
         circleCoords[2] = 0;
+
 
         //set up values for all coordinates (2-D)
         for (int i = 1; i < vertexCount; i++){
-            circleCoords[(i*3)+0] = (float) (0.5*Math.cos((3.1416/180) * (float) i) + circleCoords[0]); //took out the circleCoords[i] added to the end
-            circleCoords[(i*3)+1] = (float) (0.5*Math.sin((3.1416/180) * (float) i)+ circleCoords[1]);
-            circleCoords[(i*3)+2] = 0;
-
+            circleCoords[(i*3)+0] = (float) (0.1*Math.cos((3.1416/180) * (float) i) + circleCoords[0]); //these are necessary for being able to move
+            circleCoords[(i*3)+1] = (float) (0.1*Math.sin((3.1416/180) * (float) i) + circleCoords[1]);  //the circle around on the screen
+            circleCoords[(i*3)+2] = 0 + circleCoords[2];
+            //the coefficients in front of the math functions are what change radius size
         }
+
 
         //allocate number of coords * 4 bytes per coord
         //changing this from allocate to allocateDirect fixed the rendering issue about using native order buffer
-        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(circleCoords.length*4);
+        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(circleCoords.length * 4);
 
         //use device hardware's native byteorder
         byteBuffer.order(ByteOrder.nativeOrder());
@@ -142,6 +155,8 @@ public class Circle {
 
         // Draw the circle as filled shape
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, vertexCount);
+
+
 
         // Disable vertex array
         GLES20.glDisableVertexAttribArray(mPositionHandle);

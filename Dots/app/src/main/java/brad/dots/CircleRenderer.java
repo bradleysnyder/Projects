@@ -15,7 +15,8 @@ import javax.microedition.khronos.opengles.GL10;
 public class CircleRenderer implements GLSurfaceView.Renderer {
 
     private static final String TAG = "CircleRenderer";
-    private Circle mCircle;
+    //changed to public
+    public Circle mCircle;
 
     private final float[] mMVPMatrix = new float[16];
     private final float[] mProjectionMatrix = new float[16];
@@ -118,6 +119,18 @@ public class CircleRenderer implements GLSurfaceView.Renderer {
             Log.e(TAG, glOperation + ": glError " + error);
             throw new RuntimeException(glOperation + ": glError " + error);
         }
+    }
+
+    public void clearCircle(){ //might clear screen
+        //GLES20.glDeleteProgram(mCircle.mProgram);
+        //GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        mCircle.color[0] = 1.0f;
+        mCircle.color[1] = 1.0f;
+        mCircle.color[2] = 1.0f;
+    }
+
+    public void removeCircle(){
+
     }
 
 }

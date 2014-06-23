@@ -36,9 +36,14 @@ public class SplashScreen extends Activity {
             public void run(){
                 Intent i = new Intent(SplashScreen.this, MainActivity.class);
                 startActivity(i);
+                //testing out some activity transitions
+                //I'll work on that later..using just integers caused it to crash
+                //overridePendingTransition(1, 1);
 
                 //stop activity
                 finish();
+                //overridePendingTransition(1, 1);
+
             }
         },
         splash_timer);
